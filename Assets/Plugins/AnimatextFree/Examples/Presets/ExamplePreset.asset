@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1442515340, guid: 9abd0afa941745643b78b8f2c0918690, type: 3}
+  m_Name: ExamplePreset
+  m_EditorClassIdentifier: 
+  reverse: 0
+  loopCount: 0
+  loopInterval: 0
+  pingpongLoop: 0
+  continuousLoop: 0
+  sortType: 0
+  interval: 0.5
+  singleTime: 1
+  position: {x: 0, y: 30}
+  easingType: 0
+  fadeRange:
+    start: 0
+    end: 0.5
