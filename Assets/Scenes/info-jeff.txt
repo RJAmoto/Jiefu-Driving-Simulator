@@ -1,0 +1,5 @@
+Level 2 : Seat Belt and Dont Text while driving message sign, Traffic Light, Traffic light ahead sign (pop up message explain), Road Dead End sign
+Level 3 : Parking Area(Show where can drivers can park), Maximum Speed Restriction, Minimum Speed Restriction, Slow down 
+Level 4 : Traffic light (GO) , Stop sign, Pedestrian Sign & Lane, Left turn only, Rumble Strips
+Level 5 : Double Solid Yellow Lines, Follow direction signs (Turn left/right), Park your car, End of speed restriction sign, T Junction
+Level 6 : Uphill, Downhill, No Blowing of Horns(Pop Up message explanation),

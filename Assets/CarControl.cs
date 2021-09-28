@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CarControl : MonoBehaviour
 {
@@ -7,7 +8,12 @@ public class CarControl : MonoBehaviour
 
     // PUBLIC
 
+
     public bool driveable = false;
+    public float drive;
+    public float steer;
+    public float brake;
+
 
     // Wheel Wrapping Objects
     public Transform frontLeftWheelWrapper;
@@ -51,10 +57,10 @@ public class CarControl : MonoBehaviour
     // PRIVATE
 
     // acceleration increment counter
-    private float torquePower = 0f;
+    private float torquePower = 200f;
 
     // turn increment counter
-    private float steerAngle = 0f;
+    private float steerAngle = 30f;
 
     // original wheel positions
     // Front Left
@@ -62,7 +68,7 @@ public class CarControl : MonoBehaviour
     private float wheelMeshWrapperFLy;
     private float wheelMeshWrapperFLz;
     // Front Right
-    private float wheelMeshWrapperFRx;
+    private float wheelMeshWrapperFRx; 
     private float wheelMeshWrapperFRy;
     private float wheelMeshWrapperFRz;
     // Rear Left
@@ -77,27 +83,26 @@ public class CarControl : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody>().centerOfMass = centerOfMass;
-
-        // Setup initial values
-
-        // Front Left
-        // wheelMeshWrapperFLx = frontLeftWheelWrapper.localPosition.x;
-        // wheelMeshWrapperFLy = frontLeftWheelWrapper.localPosition.y;
-        // wheelMeshWrapperFLz = frontLeftWheelWrapper.localPosition.z;
-        // Front Right
-        // wheelMeshWrapperFRx = frontRightWheelWrapper.localPosition.x;
-        // wheelMeshWrapperFRy = frontRightWheelWrapper.localPosition.y;
-        // wheelMeshWrapperFRz = frontRightWheelWrapper.localPosition.z;
-        // Rear Left
-        // wheelMeshWrapperRLx = rearLeftWheelWrapper.localPosition.x;
-        // wheelMeshWrapperRLy = rearLeftWheelWrapper.localPosition.y;
-        // wheelMeshWrapperRLz = rearLeftWheelWrapper.localPosition.z;
-        // Rear Right
-        // wheelMeshWrapperRRx = rearRightWheelWrapper.localPosition.x;
-        // wheelMeshWrapperRRy = rearRightWheelWrapper.localPosition.y;
-        // wheelMeshWrapperRRz = rearRightWheelWrapper.localPosition.z;
+        GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>().centerOfMass = centerOfMass;
     }
+    // Setup initial values
+
+    // Front Left
+    // wheelMeshWrapperFLx = frontLeftWheelWrapper.localPosition.x;
+    // wheelMeshWrapperFLy = frontLeftWheelWrapper.localPosition.y;
+    // wheelMeshWrapperFLz = frontLeftWheelWrapper.localPosition.z;
+    // Front Right
+    // wheelMeshWrapperFRx = frontRightWheelWrapper.localPosition.x;
+    // wheelMeshWrapperFRy = frontRightWheelWrapper.localPosition.y;
+    // wheelMeshWrapperFRz = frontRightWheelWrapper.localPosition.z;
+    // Rear Left
+    // wheelMeshWrapperRLx = rearLeftWheelWrapper.localPosition.x;
+    // wheelMeshWrapperRLy = rearLeftWheelWrapper.localPosition.y;
+    // wheelMeshWrapperRLz = rearLeftWheelWrapper.localPosition.z;
+    // Rear Right
+    // wheelMeshWrapperRRx = rearRightWheelWrapper.localPosition.x;
+    // wheelMeshWrapperRRy = rearRightWheelWrapper.localPosition.y;
+    // wheelMeshWrapperRRz = rearRightWheelWrapper.localPosition.z;
 
 
     // Visual updates
@@ -133,77 +138,63 @@ public class CarControl : MonoBehaviour
         }
 
         // CONTROLS - FORWARD & RearWARD
-        if (Input.GetKey(KeyCode.Space))
+        if (brake == 1)
         {
             // BRAKE
             torquePower = 0f;
             wheelRL.brakeTorque = brakeTorque;
             wheelRR.brakeTorque = brakeTorque;
+
+            Debug.Log("Brake Works");
         }
         else
         {
-            // SPEED
-            torquePower = maxTorque * Mathf.Clamp(Input.GetAxis("Vertical"), -1, 1);
+            torquePower = maxTorque * drive;
             wheelRL.brakeTorque = 0f;
             wheelRR.brakeTorque = 0f;
+            // Apply torque
+            wheelRR.motorTorque = torquePower;
+            wheelRL.motorTorque = torquePower;
 
+            Debug.Log("Drive value" + drive);
         }
-        // Apply torque
-        wheelRR.motorTorque = torquePower;
-        wheelRL.motorTorque = torquePower;
-
-        // Debug.Log(Input.GetAxis("Vertical"));
-        Debug.Log("torquePower: " + torquePower);
-        Debug.Log("brakeTorque RL: " + wheelRL.brakeTorque);
-        Debug.Log("brakeTorque RR: " + wheelRR.brakeTorque);
-        Debug.Log("steerAngle: " + steerAngle);
 
         // CONTROLS - LEFT & RIGHT
         // apply steering to front wheels
-        steerAngle = maxWheelTurnAngle * Input.GetAxis("Horizontal");
+        steerAngle = maxWheelTurnAngle * steer;
         wheelFL.steerAngle = steerAngle;
         wheelFR.steerAngle = steerAngle;
 
         // Debug info
         RO_BrakeTorque = wheelRL.brakeTorque;
-        RO_SteeringAngleFL = wheelFL.steerAngle;
+        RO_SteeringAngleFL = wheelFL.steerAngle;               
         RO_SteeringAngleFR = wheelFR.steerAngle;
         RO_EngineTorque = torquePower;
 
         // SPEED
         // debug info
-        RO_speed = GetComponent<Rigidbody>().velocity.magnitude;
+        RO_speed = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>().velocity.magnitude;
 
         // KEYBOARD INPUT
 
         // FORWARD
-        if (Input.GetKey(KeyCode.W))
-        {
-            // Debug.Log("FORWARD");
-        }
 
-        // BACKWARD
-        if (Input.GetKey(KeyCode.S))
-        {
-            // Debug.Log("BACKWARD");
-        }
+    }
 
-        // LEFT
-        if (Input.GetKey(KeyCode.A))
-        {
-            // Debug.Log("LEFT");
-        }
+    public void Move(float drive, float steer, float brake)
+    {
+        this.drive = drive;
+        this.steer = steer;
+        this.brake = brake;
+    }
 
-        // RIGHT
-        if (Input.GetKey(KeyCode.D))
-        {
-            // Debug.Log("RIGHT");
-        }
+    public void horn()
+    {
+        FindObjectOfType<AudioManager>().Play("Horn");
+    }
 
-        // BRAKE
-        if (Input.GetKey(KeyCode.Space))
-        {
-            // Debug.Log("SPACE");
-        }
+    public void StopHorn()
+    {
+        FindObjectOfType<AudioManager>().Stop("Horn");
     }
 }
