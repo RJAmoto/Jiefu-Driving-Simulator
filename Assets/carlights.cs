@@ -23,9 +23,9 @@ public class carlights : MonoBehaviour {
 	private bool leftSignalON = false;
 
 	public float Brake;
-	public float HeadLight;
-	public float SignalRight;
-	public float SignalLeft;
+	public bool HeadLight;
+	public bool SignalRight;
+	public bool SignalLeft;
 
 	// Use this for initialization
 	void Start () {
@@ -47,13 +47,13 @@ public class carlights : MonoBehaviour {
 		}
 
 		//headlights on/off//
-		if(Input.GetKeyDown("1"))
+		if(HeadLight)
 		{
 			headlights.material = headlightsON;
 			spotlightLEFT.intensity = 8f;
 			spotlightRIGHT.intensity = 8f;
 		}
-		if(Input.GetKeyDown("2"))
+		else
 		{
 			headlights.material = headlightsOFF;
 			spotlightLEFT.intensity = 0f;
@@ -61,14 +61,14 @@ public class carlights : MonoBehaviour {
 		}
 
 		//steer right//
-		if(Input.GetKey(KeyCode.RightArrow))
+		if(SignalRight)
 		{
 			turnSignalRIGHT.material = turnsignalON;
 			turnSignalLEFT.material = turnsignalOFF;
 			rightSignalON = true;
 			leftSignalON = false;
 		}
-		else if(Input.GetKey(KeyCode.LeftArrow))
+		else if(SignalLeft)
 		{
 			turnSignalRIGHT.material = turnsignalOFF;
 			turnSignalLEFT.material = turnsignalON;
@@ -102,6 +102,19 @@ public class carlights : MonoBehaviour {
 	public void setBrake(float BrakeLight)
     {
 		this.Brake = BrakeLight;
+	}
+
+	public void setHeadLight(bool isOn)
+    {
+		HeadLight = isOn;
+	}
+	public void turnLeft(bool isOn)
+	{
+		SignalLeft = isOn;
+	}
+	public void turnRight(bool isOn)
+	{
+		SignalRight = isOn;
 	}
 
 

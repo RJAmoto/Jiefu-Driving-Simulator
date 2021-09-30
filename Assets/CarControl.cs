@@ -14,6 +14,13 @@ public class CarControl : MonoBehaviour
     public float steer;
     public float brake;
 
+    [Range(0, 1)]
+    public float KeepGrip = 1f;
+    public float Grip = 5f;
+
+    public WheelInfo[] Wheels;
+    protected Rigidbody Rigidbody;
+
 
     // Wheel Wrapping Objects
     public Transform frontLeftWheelWrapper;
@@ -81,9 +88,12 @@ public class CarControl : MonoBehaviour
     private float wheelMeshWrapperRRz;
 
 
-    void Start()
+
+    void Awake()
     {
-        GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>().centerOfMass = centerOfMass;
+        Rigidbody = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>();
+        Rigidbody.centerOfMass = centerOfMass;
+        OnValidate();
     }
     // Setup initial values
 
@@ -136,7 +146,6 @@ public class CarControl : MonoBehaviour
         {
             return;
         }
-
         // CONTROLS - FORWARD & RearWARD
         if (brake == 1)
         {
@@ -173,7 +182,10 @@ public class CarControl : MonoBehaviour
 
         // SPEED
         // debug info
-        RO_speed = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>().velocity.magnitude;
+        RO_speed = Rigidbody.velocity.magnitude;
+
+
+        Rigidbody.AddForceAtPosition(transform.up * Rigidbody.velocity.magnitude * -0.1f * Grip, transform.position + transform.rotation * centerOfMass);
 
         // KEYBOARD INPUT
 
@@ -197,4 +209,43 @@ public class CarControl : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Stop("Horn");
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + centerOfMass, .1f);
+        Gizmos.DrawWireSphere(transform.position + centerOfMass, .11f);
+    }
+    void OnValidate()
+    {
+        Debug.Log("Validate");
+        for (int i = 0; i < Wheels.Length; i++)
+        {
+            //settings
+            var ffriction = Wheels[i].WheelCollider.forwardFriction;
+            var sfriction = Wheels[i].WheelCollider.sidewaysFriction;
+            ffriction.asymptoteValue = Wheels[i].WheelCollider.forwardFriction.extremumValue * KeepGrip * 0.998f + 0.002f;
+            sfriction.extremumValue = 1f;
+            ffriction.extremumSlip = 1f;
+            ffriction.asymptoteSlip = 2f;
+            ffriction.stiffness = Grip;
+            sfriction.extremumValue = 1f;
+            sfriction.asymptoteValue = Wheels[i].WheelCollider.sidewaysFriction.extremumValue * KeepGrip * 0.998f + 0.002f;
+            sfriction.extremumSlip = 0.5f;
+            sfriction.asymptoteSlip = 1f;
+            sfriction.stiffness = Grip;
+            Wheels[i].WheelCollider.forwardFriction = ffriction;
+            Wheels[i].WheelCollider.sidewaysFriction = sfriction;
+        }
+    }
+    [System.Serializable]
+    public struct WheelInfo
+    {
+        public WheelCollider WheelCollider;
+        public Transform MeshRenderer;
+        public bool Steer;
+        public bool Motor;
+        [HideInInspector]
+        public float Rotation;
+    }
+
 }
