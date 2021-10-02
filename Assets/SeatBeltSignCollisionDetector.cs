@@ -32,5 +32,6 @@ public class SeatBeltSignCollisionDetector : MonoBehaviour
             RedEffect.SetTrigger("Bumped");
             data.money = data.money - 20;
         }
+        data.saveData();
     }
 }
