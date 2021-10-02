@@ -86,12 +86,14 @@ public class CarControl : MonoBehaviour
     private float wheelMeshWrapperRRx;
     private float wheelMeshWrapperRRy;
     private float wheelMeshWrapperRRz;
+    private Data data;
 
 
 
     void Awake()
     {
         Rigidbody = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>();
+        data = GameObject.Find("FileHandler").GetComponent<Data>();
         Rigidbody.centerOfMass = centerOfMass;
         OnValidate();
     }
@@ -153,8 +155,7 @@ public class CarControl : MonoBehaviour
             torquePower = 0f;
             wheelRL.brakeTorque = brakeTorque;
             wheelRR.brakeTorque = brakeTorque;
-
-            Debug.Log("Brake Works");
+           
         }
         else
         {
@@ -166,6 +167,7 @@ public class CarControl : MonoBehaviour
             wheelRL.motorTorque = torquePower;
 
             Debug.Log("Drive value" + drive);
+            data.loadData();
         }
 
         // CONTROLS - LEFT & RIGHT
@@ -209,6 +211,15 @@ public class CarControl : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Stop("Horn");
     }
+
+    public void BrakeSoundOn()
+    {
+        FindObjectOfType<AudioManager>().Play("Brake");
+    }
+    public void BrakeSoundOff()
+    {
+        FindObjectOfType<AudioManager>().Stop("Brake");
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -232,7 +243,13 @@ public class CarControl : MonoBehaviour
             sfriction.asymptoteValue = Wheels[i].WheelCollider.sidewaysFriction.extremumValue * KeepGrip * 0.998f + 0.002f;
             sfriction.extremumSlip = 0.5f;
             sfriction.asymptoteSlip = 1f;
-            sfriction.stiffness = Grip;
+            if (i==2||i==3)
+            {
+                sfriction.stiffness = Grip * 2;
+            }
+            else {
+                sfriction.stiffness = Grip;
+            }
             Wheels[i].WheelCollider.forwardFriction = ffriction;
             Wheels[i].WheelCollider.sidewaysFriction = sfriction;
         }

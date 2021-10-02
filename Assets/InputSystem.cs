@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InputSystem : MonoBehaviour{
+public class InputSystem : MonoBehaviour {
 
     public float accel;
     public float steer;
@@ -11,7 +11,13 @@ public class InputSystem : MonoBehaviour{
 
     public Sprite reverse;
     public Sprite Forward;
+    public Sprite seatBeltOn;
+    public Sprite seatBeltOff;
+
     public Toggle toggle;
+    public Toggle SeatBelt;
+
+    public bool SeatBeltIsOn = false;
 
 
 
@@ -26,7 +32,7 @@ public class InputSystem : MonoBehaviour{
     {
         if (rev)
         {
-            accel = input*-1;
+            accel = input * -1;
             toggle.image.sprite = reverse;
 
         }
@@ -60,12 +66,30 @@ public class InputSystem : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        UI.SetActive(true);
+
     }
 
     void FixedUpdate()
     {
-        carControl.Move(accel,steer,brake);
+        carControl.Move(accel, steer, brake);
         carLight.setBrake(brake);
+    }
+
+    public void SeatBeltSwitch(bool input)
+    {
+        SeatBeltIsOn = input;
+
+        if (SeatBeltIsOn)
+        {
+            SeatBelt.image.sprite = seatBeltOn;
+        }
+        else
+        {
+            SeatBelt.image.sprite = seatBeltOff;
+        }
+    }
+    public bool IsSeatbeltOn()
+    {
+        return SeatBeltIsOn;
     }
 }
