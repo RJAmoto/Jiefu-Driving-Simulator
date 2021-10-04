@@ -5,18 +5,15 @@ using TMPro;
 
 public class collisionDetector : MonoBehaviour
 {
-
     AudioSource bump1;
     Data data;
-    Animator anim;
-    Animator wreck;
+    PlayerActions action;
     public TextMeshProUGUI myTMP;
 
     public void Start()
     {
         data = GameObject.Find("FileHandler").GetComponent<Data>();
-        anim = GameObject.Find("RedEffect").GetComponent<Animator>();
-        wreck = myTMP.GetComponent<Animator>();
+        action = GameObject.Find("Watcher").GetComponent<PlayerActions>();
 
         bump1 = GetComponent<AudioSource>();
     }
@@ -25,15 +22,12 @@ public class collisionDetector : MonoBehaviour
 
         if (col.collider.name == "SeatBeltSign")
         {
-
+            bump1.Play();
         }
         else
         {
             bump1.Play();
-            anim.SetTrigger("Bumped");
-            wreck.SetTrigger("Wreckless");
-            Debug.Log("We hit something");
-            data.money = data.money - 20;
+            action.recklessDriving();
         }
         data.saveData();
     }

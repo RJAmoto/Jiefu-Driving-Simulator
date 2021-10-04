@@ -13,12 +13,11 @@ public class Speedometer : MonoBehaviour
     public float minSpeedArrowAngle;
     public float maxSpeedArrowAngle;
 
-    [Header("UI")]
     public Text speedLabel; // The label that displays the speed;
     public RectTransform arrow; // The arrow in the speedometer
 
-    private float speed = 0.0f;
-    private void Update()
+    public float speed = 0.0f;
+    void Update()
     {
         // 3.6f to convert in kilometers
         // ** The speed must be clamped by the car controller **

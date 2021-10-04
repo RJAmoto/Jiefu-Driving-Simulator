@@ -166,7 +166,6 @@ public class CarControl : MonoBehaviour
             wheelRR.motorTorque = torquePower;
             wheelRL.motorTorque = torquePower;
 
-            Debug.Log("Drive value" + drive);
             data.loadData();
         }
 
@@ -228,7 +227,6 @@ public class CarControl : MonoBehaviour
     }
     void OnValidate()
     {
-        Debug.Log("Validate");
         for (int i = 0; i < Wheels.Length; i++)
         {
             //settings
