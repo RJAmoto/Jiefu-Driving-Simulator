@@ -35,7 +35,6 @@ public class TrafficLightController : MonoBehaviour
         if (index == 0)
         {
             //red
-            Debug.Log("Light Index: "+index);
             lights[0].enabled = true;
             lights[1].enabled = false;
             lights[2].enabled = false;

@@ -25,7 +25,9 @@ public class RenderSign : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        toggle.image.sprite = material;
+        if (other.tag == "Player") {
+            toggle.image.sprite = material;
+        }
     }
     public void OnTriggerExit(Collider other)
     {

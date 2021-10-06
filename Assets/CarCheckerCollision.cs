@@ -9,7 +9,7 @@ public class CarCheckerCollision : MonoBehaviour
 
     InputSystem inputSystem;
     PlayerActions action;
-    TrafficLightController trafficLight;
+    public TrafficLightController trafficLight;
     Speedometer playerSpeed;
 
     public float requiredSpeed;
@@ -22,7 +22,7 @@ public class CarCheckerCollision : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (this.name == "SeatBeltSign")
+        if (this.name == "SeatBeltSign"&&other.tag == "Player")
         {
             if (inputSystem.SeatBeltIsOn)
             {
@@ -33,7 +33,7 @@ public class CarCheckerCollision : MonoBehaviour
                 action.DisregardingTrafficSign();
             }
         }
-        else if (this.tag == "Traffic Light")
+        else if (this.tag == "Traffic Light"&& other.tag == "Player")
         {
             if (trafficLight.lights[0].enabled == true)
             {
@@ -44,7 +44,7 @@ public class CarCheckerCollision : MonoBehaviour
                 action.goodBoy();
             }
         }
-        else if (this.tag == "Speed Limit Sign")
+        else if (this.tag == "Speed Limit Sign"&& other.tag == "Player")
         {
             if (playerSpeed.speed > requiredSpeed)
             {
