@@ -31,6 +31,9 @@ public class RenderSign : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        toggle.image.sprite = SignUIBlank;
+        if (other.tag == "Player")
+        {
+            toggle.image.sprite = SignUIBlank;
+        }
     }
 }

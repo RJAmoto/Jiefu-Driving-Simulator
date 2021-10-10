@@ -21,11 +21,13 @@ public class carlights : MonoBehaviour {
 
 	private bool rightSignalON = false;
 	private bool leftSignalON = false;
+	private bool hazardSignalON = false;
 
 	public float Brake;
 	public bool HeadLight;
 	public bool SignalRight;
 	public bool SignalLeft;
+	public bool hazardL;
 
 	// Use this for initialization
 	void Start () {
@@ -75,6 +77,12 @@ public class carlights : MonoBehaviour {
 			rightSignalON = false;
 			leftSignalON = true;
 		}
+		else if (hazardL)
+        {
+			turnSignalRIGHT.material = turnsignalON;
+			turnSignalLEFT.material = turnsignalON;
+			hazardSignalON = true;
+		}
 		else
 		{
 			turnSignalRIGHT.material = turnsignalOFF;
@@ -97,6 +105,14 @@ public class carlights : MonoBehaviour {
 			float emission = floor + Mathf.PingPong(Time.time*2f, ceiling - floor);
 			turnSignalRIGHT.material.SetColor("_EmissionColor",new Color(1f,1f,1f)*emission);
 		}
+        if (hazardSignalON)
+        {
+			float floor = 0f;
+			float ceiling = 1f;
+			float emission = floor + Mathf.PingPong(Time.time * 2f, ceiling - floor);
+			turnSignalLEFT.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+			turnSignalRIGHT.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+		}
 	}
 
 	public void setBrake(float BrakeLight)
@@ -116,6 +132,11 @@ public class carlights : MonoBehaviour {
 	{
 		SignalRight = isOn;
 	}
+
+	public void hazard(bool isOn)
+    {
+		hazardL = isOn;
+    }
 
 
 
