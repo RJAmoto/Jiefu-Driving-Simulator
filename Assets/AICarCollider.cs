@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class AICarCollider : MonoBehaviour
 {
-    FollowPath path;
+    public FollowPath path;
     public GameObject parent;
     // Start is called before the first frame update
     void Start()
     {
-        path = GameObject.FindGameObjectWithTag("AI").GetComponent<FollowPath>();
+
     }
 
      void Update()
     {
         transform.rotation = parent.transform.rotation;
         transform.position = parent.transform.position;
+
         path.time = path.time - 1 * Time.deltaTime;
 
         if (path.time <= 0)
@@ -27,26 +28,24 @@ public class AICarCollider : MonoBehaviour
     {
         if (other.tag == "AI")
         {
-            path.speed = 0;
-            path.HorsePower = 0;
+            path.time = 3;
+            path.stop();
         }
         else if (other.tag == "Player")
         {
-            path.speed = 0;
-            path.HorsePower = 0;
+            path.time = 3;
+            path.stop();
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            path.time = 3;
-            path.speed += 14;
+            //path.go();
         }
-        else if (other.tag == "Player")
+        else if (other.tag == "AI")
         {
-            path.time = 3;
-            path.speed += 14;
+            //path.go();
         }
     }
 }
