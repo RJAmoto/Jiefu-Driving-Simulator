@@ -4,4 +4,4 @@
   <source src="screenshot/trailer.mp4" type="video/mp4">
 </video>
 
-<img src = "screenshot/1.jpg" width = "50%" height = "50%">
+<img src = "screenshot/1.png" width = "50%" height = "50%">
