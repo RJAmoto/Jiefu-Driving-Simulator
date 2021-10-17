@@ -6,6 +6,8 @@ public class AICarCollider : MonoBehaviour
 {
     public FollowPath path;
     public GameObject parent;
+
+    bool stop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,29 +25,22 @@ public class AICarCollider : MonoBehaviour
         {
             path.time = 0;
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "AI")
+
+        if (stop)
         {
             path.time = 3;
-            path.stop();
         }
-        else if (other.tag == "Player")
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "AI")
         {
-            path.time = 3;
+            stop = true;
             path.stop();
         }
     }
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            //path.go();
-        }
-        else if (other.tag == "AI")
-        {
-            //path.go();
-        }
+            stop = false;
     }
 }
