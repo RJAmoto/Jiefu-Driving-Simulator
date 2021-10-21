@@ -15,7 +15,7 @@ public class Money : MonoBehaviour
 
     public void Start()
     {
-        data = GameObject.Find("FileHandler").GetComponent<Data>();
+        data = GameObject.Find("GameData").GetComponent<Data>();
     }
 
     void Update()

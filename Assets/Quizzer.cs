@@ -6,6 +6,9 @@ using TMPro;
 
 public class Quizzer : MonoBehaviour
 {
+    Data data;
+    public Animator moneyChange;
+    public TextMeshProUGUI MoneyAnimText;
 
     public TextMeshProUGUI ansText1;
     public TextMeshProUGUI ansText2;
@@ -22,6 +25,8 @@ public class Quizzer : MonoBehaviour
 
     void Start()
     {
+        data = GameObject.Find("GameData").GetComponent<Data>();
+        data.loadData();
     }
 
     // Update is called once per frame
@@ -44,16 +49,21 @@ public class Quizzer : MonoBehaviour
 
     public void choose(int choiceIndex)
     {
-
         this.choiceIndex = choiceIndex;
 
         if (choiceIndex==answerIndex)
         {
             Debug.Log("Correct");
+            data.money += 500;
+            MoneyAnimText.SetText("+500");
+            moneyChange.SetTrigger("Add");
             questionCounter += 1;
         }
         else {
             Debug.Log("Wrong");
+            data.money -= 100;
+            MoneyAnimText.SetText("-100");
+            moneyChange.SetTrigger("Minus");
             questionCounter += 1;
         }
     }
