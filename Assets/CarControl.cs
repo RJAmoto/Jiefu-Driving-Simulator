@@ -93,7 +93,7 @@ public class CarControl : MonoBehaviour
     void Awake()
     {
         Rigidbody = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>();
-        data = GameObject.Find("FileHandler").GetComponent<Data>();
+        data = GameObject.Find("GameData").GetComponent<Data>();
         Rigidbody.centerOfMass = centerOfMass;
         OnValidate();
     }

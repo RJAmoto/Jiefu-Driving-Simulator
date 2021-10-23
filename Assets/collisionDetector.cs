@@ -12,7 +12,7 @@ public class collisionDetector : MonoBehaviour
 
     public void Start()
     {
-        data = GameObject.Find("FileHandler").GetComponent<Data>();
+        data = GameObject.Find("GameData").GetComponent<Data>();
         action = GameObject.Find("Watcher").GetComponent<PlayerActions>();
 
         bump1 = GetComponent<AudioSource>();

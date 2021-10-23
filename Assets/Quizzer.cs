@@ -8,7 +8,9 @@ public class Quizzer : MonoBehaviour
 {
     Data data;
     public Animator moneyChange;
+    public Animator res;
     public TextMeshProUGUI MoneyAnimText;
+    public TextMeshProUGUI result;
 
     public TextMeshProUGUI ansText1;
     public TextMeshProUGUI ansText2;
@@ -53,14 +55,16 @@ public class Quizzer : MonoBehaviour
 
         if (choiceIndex==answerIndex)
         {
-            Debug.Log("Correct");
             data.money += 500;
+            result.SetText("Correct");
+            res.SetTrigger("correct");
             MoneyAnimText.SetText("+500");
             moneyChange.SetTrigger("Add");
             questionCounter += 1;
         }
         else {
-            Debug.Log("Wrong");
+            result.SetText("Wrong");
+            res.SetTrigger("wrong");
             data.money -= 100;
             MoneyAnimText.SetText("-100");
             moneyChange.SetTrigger("Minus");

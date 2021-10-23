@@ -45,7 +45,7 @@ public class PlayerActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data = GameObject.Find("FileHandler").GetComponent<Data>();
+        data = GameObject.Find("GameData").GetComponent<Data>();
         redEffect = GameObject.Find("RedEffect").GetComponent<Animator>();
 
         gComplete1 = GameObject.Find("WheelFrontLeft").GetComponent<FinishCollisionDetector>();
