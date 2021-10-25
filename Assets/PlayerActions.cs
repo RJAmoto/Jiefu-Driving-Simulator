@@ -40,7 +40,8 @@ public class PlayerActions : MonoBehaviour
 
     GameObject Controls;
 
-
+    public float timer = 0;
+    float time = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +62,12 @@ public class PlayerActions : MonoBehaviour
         void Update()
         {
 
+        timer = timer - 1 * Time.deltaTime;
+
+        if (timer <0)
+        {
+            timer = 0;
+        }
             if (violations == 0)
             {
                 violation.SetText("Good Job, You did it without Violations");
@@ -73,77 +80,112 @@ public class PlayerActions : MonoBehaviour
 
         if (gComplete1.finish == true && gComplete2.finish == true && gComplete3.finish == true && gComplete4.finish == true && meter.speed < 5)
             {
-            openFinishPopup();
-            Controls.transform.localScale = new Vector3(0,0,0);
+                openFinishPopup();
+                Controls.transform.localScale = new Vector3(0,0,0);
             }
         }
 
         public void recklessDriving()
         {
-            
+        if (timer == 0) {
             reckless.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - recklessPenalty;
 
-            moneyChange.SetText("-" +recklessPenalty);
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
+            timer = time;
+            moneyChange.SetText("-" + recklessPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
-            
 
-            
+
+
             recklessCount += 1;
             violations += 1;
             data.saveData();
+            }
         }
-        public void DisregardingTrafficSign()
+    public void DisregardingTrafficSign()
+    {
+        if (timer == 0)
         {
             disregardingTrafficSign.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - DTSPenalty;
 
+            timer = time;
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
             moneyChange.SetText("-" + DTSPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
 
-        dtsCount += 1;
+            dtsCount += 1;
             violations += 1;
-        data.saveData();
+            data.saveData();
+            }
         }
 
-        public void BTRL()
+    public void BTRL()
+    {
+        if (timer == 0)
         {
             btrl.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - btrlPenalty;
             moneyChange.SetText("-" + btrlPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
+            timer = time;
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
 
-        btrlCount += 1;
+            btrlCount += 1;
             violations += 1;
-        data.saveData();
+            data.saveData();
         }
+    }
 
-        public void overSpeeding()
+    public void overSpeeding()
+    {
+
+        if (timer == 0)
         {
             overSpeed.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - overSpeedingPenalty;
 
+            timer = time;
+
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
             moneyChange.SetText("-" + overSpeedingPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
 
-        overspeedCount += 1;
+            overspeedCount += 1;
             violations += 1;
             data.saveData();
+           }
         }
-
         public void goodBoy()
         {
+        if (timer == time)
+        {
+            timer = 3;
             good.GetComponent<Animator>().SetTrigger("ViolText");
             data.money = data.money + reward;
 
             moneyChange.SetText("+" + reward);
             moneyChange.GetComponent<Animator>().SetTrigger("Add");
 
-        data.saveData();
+            data.saveData();
+        }
         }
     public void openFinishPopup()
     {

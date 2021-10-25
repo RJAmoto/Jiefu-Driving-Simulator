@@ -29,7 +29,7 @@ public class FollowPlayer : MonoBehaviour
     }
     private void follow()
     {
-        gameObject.transform.position = Vector3.Lerp(transform.position, Child.transform.position, Time.deltaTime*speed) ;
+        gameObject.transform.position = Vector3.Lerp(transform.position, Child.transform.position, Time.deltaTime*speed);
         gameObject.transform.LookAt(Player.gameObject.transform.position);
 
     }

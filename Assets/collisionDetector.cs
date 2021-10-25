@@ -10,6 +10,9 @@ public class collisionDetector : MonoBehaviour
     PlayerActions action;
     public TextMeshProUGUI myTMP;
 
+    float timer = 0;
+    float time = 0.7f;
+
     public void Start()
     {
         data = GameObject.Find("GameData").GetComponent<Data>();
@@ -17,18 +20,37 @@ public class collisionDetector : MonoBehaviour
 
         bump1 = GetComponent<AudioSource>();
     }
+
+    public void Update()
+    {
+        timer = timer - 1 * Time.deltaTime;
+
+        if (timer < 0)
+        {
+            timer = 0;
+        }
+    }
+
+
     public void OnCollisionEnter(Collision col)
     {
-
-        if (col.collider.name == "SeatBeltSign")
-        {
-            bump1.Play();
+        if (timer == 0) {
+            if (col.gameObject.name == "SeatBeltSign")
+            {
+                bump1.Play();
+                timer = time;
+            }
+            else if (col.gameObject.tag == "Pedestrian")
+            {
+                timer = time;
+            }
+            else
+            {
+                bump1.Play();
+                action.recklessDriving();
+                timer = time;
+            }
+            data.saveData();
         }
-        else
-        {
-            bump1.Play();
-            action.recklessDriving();
-        }
-        data.saveData();
     }
 }
