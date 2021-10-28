@@ -4,52 +4,38 @@ using UnityEngine;
 
 public class AICarCollider : MonoBehaviour
 {
-    public FollowPath path;
-    public GameObject parent;
 
-    public backCollider back;
 
-    bool stop = false;
+    public VehicleMover mover;
 
+
+    float SensorLength = 10f;
+    float sensorDistance = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        back = GameObject.Find("Back collider").GetComponent<backCollider>();
+
     }
 
-     void Update()
+    void FixedUpdate()
     {
-        transform.rotation = parent.transform.rotation;
-        transform.position = parent.transform.position;
-
-        path.time = path.time - 1 * Time.deltaTime;
-
-        if (path.time <= 0)
-        {
-            path.time = 0;
-        }
-
-        if (stop)
-        {
-            path.time = 1;
-        }
+        sensor();
     }
-    void OnTriggerEnter(Collider other)
+
+    public void sensor()
     {
-        if (other.name == "CarWingLeft" || other.name == "CarWingRight")
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, SensorLength))
         {
-            return;
+            if (hit.transform.CompareTag("Player")|| hit.transform.CompareTag("AI"))
+            {
+                mover.carStop();
+                mover.TimeSet(2);
+            }
         }
-        else
-        {
-            stop = true;
-            path.stop();
-        }
-        
-    }
-    void OnTriggerExit(Collider other)
-    {
-            stop = false;
+        Debug.DrawRay(transform.position, transform.forward * SensorLength, Color.red);
+
     }
 }

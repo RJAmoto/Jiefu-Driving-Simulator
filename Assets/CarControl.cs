@@ -21,7 +21,6 @@ public class CarControl : MonoBehaviour
     public WheelInfo[] Wheels;
     protected Rigidbody Rigidbody;
 
-
     // Wheel Wrapping Objects
     public Transform frontLeftWheelWrapper;
     public Transform frontRightWheelWrapper;

@@ -34,8 +34,6 @@ public class CounterFlow : MonoBehaviour
             counterFlow = false;
         }
 
-        Debug.Log("Right: "+rightWing);
-        Debug.Log("Left: " +leftWing);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,7 +48,6 @@ public class CounterFlow : MonoBehaviour
         }
         else
         {
-            Debug.Log("Both Collided");
         }
     }
 
@@ -66,7 +63,6 @@ public class CounterFlow : MonoBehaviour
         }
         else
         {
-            Debug.Log("Both Exited");
         }
     }
 }

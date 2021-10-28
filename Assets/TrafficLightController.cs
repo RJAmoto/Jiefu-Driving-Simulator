@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrafficLightController : MonoBehaviour
 {
-    float time = 5;
+    public float time = 5;
     public Light[] lights;
     int index = 0;
     // Update is called once per frame
