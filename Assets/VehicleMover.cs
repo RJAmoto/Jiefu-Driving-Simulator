@@ -9,6 +9,15 @@ public class VehicleMover : MonoBehaviour
     public NavMeshAgent vAgent;
     public GameObject guide;
     public float timer = 0.0f;
+    public GameObject look;
+
+
+    public bool stopped = false;
+    public float stopTimer = 18;
+    public float random;
+
+
+
 
     bool inPos = false;
 
@@ -29,7 +38,7 @@ public class VehicleMover : MonoBehaviour
                 transform.position = guide.transform.position;
                 inPos = true;
             }
-
+        //    gameObject.transform.LookAt(look.transform.position);
         //timer
         timer = timer - 1 * Time.deltaTime;
 
@@ -39,7 +48,7 @@ public class VehicleMover : MonoBehaviour
         }
 
         //Sets the destination to where the ai would go;
-        if (timer == 0)
+        if (timer == 0 || stopped == false)
         {
             vAgent.enabled = true;
             rb.isKinematic = true;
@@ -48,6 +57,32 @@ public class VehicleMover : MonoBehaviour
         else
         {
             carStop();
+        }
+
+        if (stopped)
+        {
+            stopTimer -= 1 * Time.deltaTime;
+
+            if(stopTimer <= 0)
+            {
+                stopTimer = 0;
+            }
+
+            if (stopTimer == 0)
+            {
+                random = Random.Range(0, 100);
+
+                if (random>=0 || random <= 50)
+                {
+                    stopped = false;
+                    stopTimer = 18;
+                }
+                else
+                {
+                    stopTimer = 5;
+                }
+
+            }
         }
     }
 
@@ -63,6 +98,7 @@ public class VehicleMover : MonoBehaviour
         guide.GetComponent<FollowPath>().stop();
         vAgent.isStopped = true;
 
+        stopped = true;
         //    vAgent.SetDestination(guide.transform.position);
     }
 

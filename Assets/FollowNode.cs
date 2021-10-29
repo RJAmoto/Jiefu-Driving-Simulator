@@ -17,7 +17,7 @@ public class FollowNode : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Node = other.gameObject.GetComponent<Waypoint>().next;
+        Node = other.gameObject.GetComponentInChildren<Waypoint>().next;
         Debug.Log("Waypoint Reached");
     }
 
