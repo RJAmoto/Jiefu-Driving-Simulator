@@ -58,32 +58,41 @@ public class PlayerActions : MonoBehaviour
         Controls = GameObject.Find("Controls");
     }
 
-        // Update is called once per frame
-        void Update()
-        {
+    // Update is called once per frame
+    void Update()
+    {
 
         timer = timer - 1 * Time.deltaTime;
 
-        if (timer <0)
+        if (timer < 0)
         {
             timer = 0;
         }
-            if (violations == 0)
-            {
-                violation.SetText("Good Job, You did it without Violations");
-            }
-            else if (violations > 0)
-            {
-                violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount/2+ "\r\nReckless Driving: " +recklessCount+ "\r\nDisregarding Traffic Sign: " +dtsCount/2+ "\r\nOver Speeding: " + overspeedCount);
-            }
+        if (violations == 0)
+        {
+            violation.SetText("Good Job, You did it without Violations");
+        }
+        else if (violations > 0)
+        {
+            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount / 2 + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount / 2 + "\r\nOver Speeding: " + overspeedCount);
+        }
 
 
         if (gComplete1.finish == true && gComplete2.finish == true && gComplete3.finish == true && gComplete4.finish == true && meter.speed < 5)
-            {
-                openFinishPopup();
-                Controls.transform.localScale = new Vector3(0,0,0);
-            }
+        {
+            openFinishPopup();
+            Controls.transform.localScale = new Vector3(0, 0, 0);
         }
+
+
+        if (data.money <= 0)
+        {
+
+        }
+
+    }
+
+
 
         public void recklessDriving()
         {
@@ -175,7 +184,7 @@ public class PlayerActions : MonoBehaviour
         }
         public void goodBoy()
         {
-        if (timer == time)
+        if (timer == 0)
         {
             timer = 3;
             good.GetComponent<Animator>().SetTrigger("ViolText");
@@ -185,7 +194,7 @@ public class PlayerActions : MonoBehaviour
             moneyChange.GetComponent<Animator>().SetTrigger("Add");
 
             data.saveData();
-        }
+            }
         }
     public void openFinishPopup()
     {

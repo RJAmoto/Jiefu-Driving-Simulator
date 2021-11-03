@@ -125,7 +125,7 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenLTO()
     {
-        Application.OpenURL("https://www.ltoexamreviewer.com/");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.lto.exam.reviewer&hl=en&gl=US&fbclid=IwAR0GfhnR1svSKinCj9zAu-wRguViqGtPOrFeBJc49fnT1xLNNtZW6ElPWPg");
     }
     public void OpenFB()
     {

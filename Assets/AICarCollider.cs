@@ -38,12 +38,23 @@ public class AICarCollider : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, SensorLength))
         {
-            if (hit.transform.CompareTag("Player")|| hit.transform.CompareTag("AI"))
+            if (hit.transform.CompareTag("Player")|| hit.transform.CompareTag("AI")|| hit.transform.CompareTag("Pedestrian"))
             {
+
+                if (hit.transform.CompareTag("Player"))
+                {
+                    mover.carStop();
+                    mover.TimeSet(2);
+                }
                 if (sensorTimer==0) {
                     mover.carStop();
                     mover.TimeSet(2);
                     sensorTimer = 3;
+
+                    if(mover.stopTimer < 10)
+                    {
+                        mover.stopTimer = 18;
+                    }
                 }
             }
         }

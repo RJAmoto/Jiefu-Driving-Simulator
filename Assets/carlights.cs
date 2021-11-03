@@ -1,7 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class carlights : MonoBehaviour {
+
+
+	public Toggle signalR;
+	public Toggle signalL;
+
+
+	public GameObject hazzardB;
+	public GameObject sLeftB;
+	public GameObject sRightB;
+
+	public Sprite hazardBON;
+	public Sprite SLeftBON;
+	public Sprite SRightBON;
+
+	public Sprite hazardBOFF;
+	public Sprite SLeftBOFF;
+	public Sprite SRightBOFF;
 
 	public Renderer brakelights;
 	public Material brakelightON;
@@ -35,8 +53,7 @@ public class carlights : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
-	{
+	void FixedUpdate () 	{
 		//braking//
 		if(Brake==1)
 		{
@@ -87,23 +104,58 @@ public class carlights : MonoBehaviour {
 		{
 			turnSignalRIGHT.material = turnsignalOFF;
 			turnSignalLEFT.material = turnsignalOFF;
+			hazzardB.GetComponent<Image>().sprite = hazardBOFF;
+			sLeftB.GetComponent<Image>().sprite = SLeftBOFF;
+			sRightB.GetComponent<Image>().sprite = SRightBOFF;
+
+
 			rightSignalON = false;
 			leftSignalON = false;
 		}
 
-		if(leftSignalON)
+		if (leftSignalON)
 		{
+			signalR.isOn = false;
 			float floor = 0f;
 			float ceiling = 1f;
-			float emission = floor + Mathf.PingPong(Time.time*2f, ceiling - floor);
-			turnSignalLEFT.material.SetColor("_EmissionColor",new Color(1f,1f,1f)*emission);
+			float emission = floor + Mathf.PingPong(Time.time * 2f, ceiling - floor);
+			turnSignalLEFT.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+
+			sRightB.GetComponent<Image>().sprite = SRightBOFF;
+
+			if (emission == 0)
+			{
+
+				sLeftB.GetComponent<Image>().sprite = SLeftBOFF;
+
+			}
+
+			else if (emission == 1)
+			{
+				sLeftB.GetComponent<Image>().sprite = SLeftBON;
+			}
 		}
 		if(rightSignalON)
 		{
+			signalL.isOn = false;
+
+			SignalLeft = false;
 			float floor = 0f;
 			float ceiling = 1f;
 			float emission = floor + Mathf.PingPong(Time.time*2f, ceiling - floor);
 			turnSignalRIGHT.material.SetColor("_EmissionColor",new Color(1f,1f,1f)*emission);
+
+			sLeftB.GetComponent<Image>().sprite = SLeftBOFF;
+
+			if (emission == 0)
+			{
+				sRightB.GetComponent<Image>().sprite = SRightBOFF;
+			}
+
+			else if (emission == 1)
+			{
+				sRightB.GetComponent<Image>().sprite = SRightBON;
+			}
 		}
         if (hazardSignalON)
         {
@@ -112,6 +164,16 @@ public class carlights : MonoBehaviour {
 			float emission = floor + Mathf.PingPong(Time.time * 2f, ceiling - floor);
 			turnSignalLEFT.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
 			turnSignalRIGHT.material.SetColor("_EmissionColor", new Color(1f, 1f, 1f) * emission);
+
+			if (emission == 0)
+			{
+				hazzardB.GetComponent<Image>().sprite = hazardBOFF;
+			}
+
+			else if (emission == 1)
+			{
+				hazzardB.GetComponent<Image>().sprite = hazardBON;
+			}
 		}
 	}
 
@@ -137,7 +199,6 @@ public class carlights : MonoBehaviour {
     {
 		hazardL = isOn;
     }
-
 
 
 

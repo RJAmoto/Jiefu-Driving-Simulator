@@ -16,6 +16,8 @@ public class VehicleMover : MonoBehaviour
     public float stopTimer = 18;
     public float random;
 
+    public bool decided = true;
+
 
 
 
@@ -97,6 +99,8 @@ public class VehicleMover : MonoBehaviour
     {
         guide.GetComponent<FollowPath>().stop();
         vAgent.isStopped = true;
+
+
 
         stopped = true;
         //    vAgent.SetDestination(guide.transform.position);

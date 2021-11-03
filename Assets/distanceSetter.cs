@@ -13,6 +13,7 @@ public class distanceSetter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         for (int a = 0; a < guide.Length; a++)
         {
             finalDistance += distance;
