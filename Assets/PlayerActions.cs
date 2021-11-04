@@ -22,6 +22,8 @@ public class PlayerActions : MonoBehaviour
     float DTSPenalty = 300;
     float reward = 5000;
 
+    public int levelToUnlock;
+
     public TextMeshProUGUI reckless;
     public TextMeshProUGUI disregardingTrafficSign;
     public TextMeshProUGUI btrl;
@@ -56,6 +58,7 @@ public class PlayerActions : MonoBehaviour
         meter = GameObject.Find("Speed Meter").GetComponent<Speedometer>();
 
         Controls = GameObject.Find("Controls");
+        data.loadData();
     }
 
     // Update is called once per frame
@@ -82,20 +85,21 @@ public class PlayerActions : MonoBehaviour
         {
             openFinishPopup();
             Controls.transform.localScale = new Vector3(0, 0, 0);
+            LevelUnlock(levelToUnlock);
+            data.saveData();
         }
 
 
         if (data.money <= 0)
         {
-
+            gameOver();
         }
-
     }
 
 
 
-        public void recklessDriving()
-        {
+    public void recklessDriving()
+    {
         if (timer == 0) {
             reckless.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
@@ -114,8 +118,8 @@ public class PlayerActions : MonoBehaviour
             recklessCount += 1;
             violations += 1;
             data.saveData();
-            }
         }
+    }
     public void DisregardingTrafficSign()
     {
         if (timer == 0)
@@ -135,8 +139,8 @@ public class PlayerActions : MonoBehaviour
             dtsCount += 1;
             violations += 1;
             data.saveData();
-            }
         }
+    }
 
     public void BTRL()
     {
@@ -180,10 +184,10 @@ public class PlayerActions : MonoBehaviour
             overspeedCount += 1;
             violations += 1;
             data.saveData();
-           }
         }
-        public void goodBoy()
-        {
+    }
+    public void goodBoy()
+    {
         if (timer == 0)
         {
             timer = 3;
@@ -194,14 +198,63 @@ public class PlayerActions : MonoBehaviour
             moneyChange.GetComponent<Animator>().SetTrigger("Add");
 
             data.saveData();
-            }
         }
+    }
+
+    public void gameOver()
+    {
+    }
     public void openFinishPopup()
     {
-            GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
+        GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
     }
     public void closeAnimationPopup()
     {
         GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishClose");
+    }
+    public void LevelUnlock(int level){
+        switch (level)
+        {
+            case 1: 
+                data.lvl1 = true;
+                data.saveData();
+                break;
+            case 2:  
+                data.lvl2 = true;
+                data.saveData();
+                break;
+            case 3: 
+                data.lvl3 = true;
+                data.saveData();
+                break;
+            case 4: 
+                data.lvl4 = true;
+                data.saveData();
+                break;
+            case 5:
+                data.lvl5 = true;
+                data.saveData();
+                break;
+            case 6:
+                data.lvl6 = true;
+                data.saveData();
+                break;
+            case 7:
+                data.lvl7 = true;
+                data.saveData();
+                break;
+            case 8:
+                data.lvl8 = true;
+                data.saveData();
+                break;
+            case 9:
+                data.lvl9 = true;
+                data.saveData();
+                break;
+            case 10:
+                data.lvl10 = true;
+                data.saveData();
+                break;
+        }
     }
 }

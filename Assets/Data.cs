@@ -15,6 +15,7 @@ public class Data : MonoBehaviour
     public bool lvl8 = false;
     public bool lvl9 = false;
     public bool lvl10 = false;
+    public bool canPlay = false;
 
     public void saveData()
     {
@@ -35,5 +36,7 @@ public class Data : MonoBehaviour
         lvl8 = data.lvl8;
         lvl9 = data.lvl9;
         lvl10 = data.lvl10;
+
+        canPlay = data.canPlay;
     }
 }

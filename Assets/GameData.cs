@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameData
 {
     public float money;
+    public bool canPlay;
     public bool lvl1;
     public bool lvl2;
     public bool lvl3;
@@ -20,6 +21,7 @@ public class GameData
     public GameData(Data data)
     {
         money = data.money;
+        canPlay = data.canPlay;
         lvl1 = data.lvl1;
         lvl2 = data.lvl2;
         lvl3 = data.lvl3;

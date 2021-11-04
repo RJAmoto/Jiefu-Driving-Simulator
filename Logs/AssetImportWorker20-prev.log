@@ -15,11 +15,11 @@ D:/Documents/Jiefu Driving Simulator
 -logFile
 Logs/AssetImportWorker20.log
 -srvPort
-51783
+53500
 Successfully changed project path to: D:/Documents/Jiefu Driving Simulator
 D:/Documents/Jiefu Driving Simulator
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 643.91 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 9243.62 ms, found 5 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.17f1 (a4537701e4ab)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/Resources/UnitySubsystems
@@ -31,9 +31,3 @@ Direct3D:
     Vendor:   
     VRAM:     499 MB
     Driver:   15.201.1151.0
-Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56888
-Begin MonoManager ReloadAssembly

@@ -65,6 +65,10 @@ public class Quizzer : MonoBehaviour
         else {
             result.SetText("Wrong");
             res.SetTrigger("wrong");
+            if (data.money <= 0)
+            {
+                data.money = 0;
+            }
             data.money -= 100;
             MoneyAnimText.SetText("-100");
             moneyChange.SetTrigger("Minus");

@@ -7,15 +7,26 @@ public class LevelLocker : MonoBehaviour
 {
     public bool isLocked;
     public int level;
-    Image lockImage;
+    public Image lockImage;
 
     public void setLocked()
     {
         isLocked = true;
-        lockImage.enabled = true;
     }
     public void setUnLocked()
     {
         isLocked = false;
+    }
+
+    public void Update()
+    {
+        if (isLocked)
+        {
+            lockImage.enabled = true;
+        }
+        else
+        {
+            lockImage.enabled = false;
+        }
     }
 }
