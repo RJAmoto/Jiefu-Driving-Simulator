@@ -43,7 +43,7 @@ public class PlayerActions : MonoBehaviour
     GameObject Controls;
 
     public float timer = 0;
-    float time = 3;
+    float time = 1;
 
     // Start is called before the first frame update
     void Start()
