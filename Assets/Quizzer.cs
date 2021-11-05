@@ -55,10 +55,10 @@ public class Quizzer : MonoBehaviour
 
         if (choiceIndex==answerIndex)
         {
-            data.money += 500;
+            data.money += 100;
             result.SetText("Correct");
             res.SetTrigger("correct");
-            MoneyAnimText.SetText("+500");
+            MoneyAnimText.SetText("+100");
             moneyChange.SetTrigger("Add");
             questionCounter += 1;
         }
@@ -69,8 +69,8 @@ public class Quizzer : MonoBehaviour
             {
                 data.money = 0;
             }
-            data.money -= 100;
-            MoneyAnimText.SetText("-100");
+            data.money -= 500;
+            MoneyAnimText.SetText("-500");
             moneyChange.SetTrigger("Minus");
             questionCounter += 1;
         }
