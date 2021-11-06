@@ -77,7 +77,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (violations > 0)
         {
-            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount / 2 + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount / 2 + "\r\nOver Speeding: " + overspeedCount);
+            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount + "\r\nOver Speeding: " + overspeedCount);
         }
 
 
@@ -203,10 +203,16 @@ public class PlayerActions : MonoBehaviour
 
     public void gameOver()
     {
+        openGameOverPopUp();
     }
     public void openFinishPopup()
     {
         GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
+    }
+
+    public void openGameOverPopUp()
+    {
+        GameObject.Find("Game Over Pop up").GetComponent<Animator>().SetTrigger("Open");
     }
     public void closeAnimationPopup()
     {
