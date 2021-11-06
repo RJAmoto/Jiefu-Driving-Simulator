@@ -61,17 +61,23 @@ public class Quizzer : MonoBehaviour
             MoneyAnimText.SetText("+100");
             moneyChange.SetTrigger("Add");
             questionCounter += 1;
+            data.saveData();
         }
         else {
-            result.SetText("Wrong");
-            res.SetTrigger("wrong");
-            if (data.money <= 0)
+            if (data.money <= 500)
             {
                 data.money = 0;
+                data.saveData();
             }
-            data.money -= 500;
-            MoneyAnimText.SetText("-500");
-            moneyChange.SetTrigger("Minus");
+            else
+            {
+                data.money -= 500;
+                MoneyAnimText.SetText("-500");
+                moneyChange.SetTrigger("Minus");
+                data.saveData();
+            }
+            result.SetText("Wrong");
+            res.SetTrigger("wrong");
             questionCounter += 1;
         }
     }
