@@ -263,4 +263,25 @@ public class PlayerActions : MonoBehaviour
                 break;
         }
     }
+
+    public void counterFlow(){
+        if (timer == 0)
+        {
+            disregardingTrafficSign.GetComponent<Animator>().SetTrigger("ViolText");
+            redEffect.SetTrigger("RedEffect");
+            data.money = data.money - DTSPenalty;
+
+            timer = time;
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
+            moneyChange.SetText("-" + DTSPenalty);
+            moneyChange.GetComponent<Animator>().SetTrigger("Minus");
+
+            dtsCount += 1;
+            violations += 1;
+            data.saveData();
+        }
+    }
 }
