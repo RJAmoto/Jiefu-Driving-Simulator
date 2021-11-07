@@ -39,4 +39,24 @@ public class Data : MonoBehaviour
 
         canPlay = data.canPlay;
     }
+
+    public void ResetData()
+    {
+        money = 500;
+
+        lvl1 = true;
+        lvl2 = false;
+        lvl3 = false;
+        lvl4 = false;
+        lvl5 = false;
+        lvl6 = false;
+        lvl7 = false;
+        lvl8 = false;
+        lvl9 = false;
+        lvl10 = false;
+
+        canPlay = true;
+
+        saveData();
+    }
 }

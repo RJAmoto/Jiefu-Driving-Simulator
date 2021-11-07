@@ -8,6 +8,8 @@ public class CounterFlow : MonoBehaviour
     bool leftWing = false;
     bool rightWing = false;
 
+    public PlayerActions actions;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,10 @@ public class CounterFlow : MonoBehaviour
         else if (!rightWing&&!leftWing)
         {
             counterFlow = false;
+        }
+
+        if(counterFlow){
+            actions.counterFlow();
         }
 
     }

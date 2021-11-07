@@ -43,7 +43,7 @@ public class PlayerActions : MonoBehaviour
     GameObject Controls;
 
     public float timer = 0;
-    float time = 3;
+    float time = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +77,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (violations > 0)
         {
-            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount / 2 + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount / 2 + "\r\nOver Speeding: " + overspeedCount);
+            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount + "\r\nOver Speeding: " + overspeedCount);
         }
 
 
@@ -203,10 +203,16 @@ public class PlayerActions : MonoBehaviour
 
     public void gameOver()
     {
+        openGameOverPopUp();
     }
     public void openFinishPopup()
     {
         GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
+    }
+
+    public void openGameOverPopUp()
+    {
+        GameObject.Find("Game Over Pop up").GetComponent<Animator>().SetTrigger("Open");
     }
     public void closeAnimationPopup()
     {
@@ -255,6 +261,27 @@ public class PlayerActions : MonoBehaviour
                 data.lvl10 = true;
                 data.saveData();
                 break;
+        }
+    }
+
+    public void counterFlow(){
+        if (timer == 0)
+        {
+            disregardingTrafficSign.GetComponent<Animator>().SetTrigger("ViolText");
+            redEffect.SetTrigger("RedEffect");
+            data.money = data.money - DTSPenalty;
+
+            timer = time;
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
+            moneyChange.SetText("-" + DTSPenalty);
+            moneyChange.GetComponent<Animator>().SetTrigger("Minus");
+
+            dtsCount += 1;
+            violations += 1;
+            data.saveData();
         }
     }
 }
