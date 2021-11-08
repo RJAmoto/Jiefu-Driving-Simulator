@@ -96,24 +96,6 @@ public class CarControl : MonoBehaviour
         Rigidbody.centerOfMass = centerOfMass;
         OnValidate();
     }
-    // Setup initial values
-
-    // Front Left
-    // wheelMeshWrapperFLx = frontLeftWheelWrapper.localPosition.x;
-    // wheelMeshWrapperFLy = frontLeftWheelWrapper.localPosition.y;
-    // wheelMeshWrapperFLz = frontLeftWheelWrapper.localPosition.z;
-    // Front Right
-    // wheelMeshWrapperFRx = frontRightWheelWrapper.localPosition.x;
-    // wheelMeshWrapperFRy = frontRightWheelWrapper.localPosition.y;
-    // wheelMeshWrapperFRz = frontRightWheelWrapper.localPosition.z;
-    // Rear Left
-    // wheelMeshWrapperRLx = rearLeftWheelWrapper.localPosition.x;
-    // wheelMeshWrapperRLy = rearLeftWheelWrapper.localPosition.y;
-    // wheelMeshWrapperRLz = rearLeftWheelWrapper.localPosition.z;
-    // Rear Right
-    // wheelMeshWrapperRRx = rearRightWheelWrapper.localPosition.x;
-    // wheelMeshWrapperRRy = rearRightWheelWrapper.localPosition.y;
-    // wheelMeshWrapperRRz = rearRightWheelWrapper.localPosition.z;
 
 
     // Visual updates

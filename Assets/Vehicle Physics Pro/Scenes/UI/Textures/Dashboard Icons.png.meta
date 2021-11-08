@@ -342,6 +342,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1030,6 +1031,35 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      AWD Rear Lock Icon: 21300206
+      Tail Lights Icon: 21300002
+      Parking Brake Icon: 21300010
+      ESP Icon: 21300028
+      AWD Axle Lock Icon: 21300202
+      Handbrake Icon: 21300040
+      ASR Icon: 21300026
+      ESP Off Icon: 21300012
+      ESC Icon: 21300022
+      Hazard Icon: 21300032
+      TCS Icon: 21300024
+      AWD Center Lock Icon: 21300200
+      Fuel Icon: 21300042
+      ECU Icon: 21300018
+      Warning Icon: 21300016
+      Rear Diff Lock Icon: 21300208
+      ABS Icon: 21300020
+      Headlights icon: 21300004
+      Steering: 21300196
+      Water Temp Icon: 21300036
+      Full Beam Icon: 21300006
+      AWD Full Lock Icon: 21300198
+      Battery Icon: 21300034
+      Retarder Icon: 21300008
+      Direction Icon: 21300000
+      Oil Icon: 21300038
+      AWD Front Lock Icon: 21300204
+      Front Diff Lock Icon: 21300210
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

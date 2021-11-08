@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class InputSystem : MonoBehaviour {
 
-    public float accel;
-    public float steer;
-    public float brake;
+    public float accel = 0;
+    public float steer = 0;
+    public float brake = 0;
 
     public Sprite reverse;
     public Sprite Forward;
@@ -23,23 +23,24 @@ public class InputSystem : MonoBehaviour {
 
     public bool rev = false;
 
-    CarControl carControl;
+    public CarControl carControl;
     carlights carLight;
 
     public GameObject UI;
-
+    void Start()
+    {
+        carLight = GameObject.Find("CivilianVehicle05").GetComponent<carlights>();
+    }
     public void AccelInput(float input)
     {
         if (rev)
         {
             accel = input * -1;
-            toggle.image.sprite = reverse;
 
         }
         else
         {
             accel = input;
-            toggle.image.sprite = Forward;
         }
     }
     public void SteerInput(float input)
@@ -53,15 +54,20 @@ public class InputSystem : MonoBehaviour {
 
     public void SetReverse(bool rev)
     {
+        bool reversed = rev;
+        if (reversed)
+        {
+            toggle.image.sprite = reverse;
+        }
+        else
+        {
+            toggle.image.sprite = Forward;
+        }
         this.rev = rev;
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        carControl = GameObject.Find("Body").GetComponent<CarControl>();
-        carLight = GameObject.Find("CivilianVehicle05").GetComponent<carlights>();
-    }
+
 
     // Update is called once per frame
     void Update()

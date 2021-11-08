@@ -14,13 +14,20 @@ public class PlayerActions : MonoBehaviour
     int recklessCount = 0;
     int dtsCount = 0;
     int overspeedCount = 0;
+    int counterflowCount = 0;
     int violations = 0;
 
     float recklessPenalty = 1000;
     float btrlPenalty = 2000;
     float overSpeedingPenalty = 3000;
     float DTSPenalty = 300;
-    float reward = 5000;
+    float counterFlowing = 100;
+    float reward = 500;
+
+    float popUpTimer = 0;
+    float popUpTime = 1;
+    public bool PopUp = false;
+    bool gamestop = false;
 
     public int levelToUnlock;
 
@@ -31,6 +38,7 @@ public class PlayerActions : MonoBehaviour
     public TextMeshProUGUI overSpeed;
     public TextMeshProUGUI violation;
     public TextMeshProUGUI moneyChange;
+    public TextMeshProUGUI Counterflow;
 
     bool GameIsFinished = false;
     FinishCollisionDetector gComplete1;
@@ -64,8 +72,16 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            timer = timer - 1 * Time.deltaTime;
+        if (PopUp)
+        {
+            popUpTime = popUpTime -= 1 * Time.deltaTime;
+        }
 
-        timer = timer - 1 * Time.deltaTime;
+        if (popUpTime <=0)
+        {
+            popUpTime = 0;
+        }
 
         if (timer < 0)
         {
@@ -93,6 +109,11 @@ public class PlayerActions : MonoBehaviour
         if (data.money <= 0)
         {
             gameOver();
+        }
+        if (popUpTime <= 0)
+        {
+            GameObject.Find("Canvas").GetComponent<PauseMenu>().SetPause();
+            GameObject.Find("Controls").active = false;
         }
     }
 
@@ -190,6 +211,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (timer == 0)
         {
+
             timer = 3;
             good.GetComponent<Animator>().SetTrigger("ViolText");
             data.money = data.money + reward;
@@ -203,16 +225,18 @@ public class PlayerActions : MonoBehaviour
 
     public void gameOver()
     {
-        openGameOverPopUp();
+            openGameOverPopUp();
     }
     public void openFinishPopup()
     {
         GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
+        PopUp = true;
     }
 
     public void openGameOverPopUp()
     {
         GameObject.Find("Game Over Pop up").GetComponent<Animator>().SetTrigger("Open");
+        PopUp = true;
     }
     public void closeAnimationPopup()
     {
@@ -267,19 +291,19 @@ public class PlayerActions : MonoBehaviour
     public void counterFlow(){
         if (timer == 0)
         {
-            disregardingTrafficSign.GetComponent<Animator>().SetTrigger("ViolText");
+            Counterflow.GetComponent<Animator>().SetTrigger("ViolText");
             redEffect.SetTrigger("RedEffect");
-            data.money = data.money - DTSPenalty;
+            data.money = data.money - counterFlowing;
 
             timer = time;
             if (data.money < 0)
             {
                 data.money = 0;
             }
-            moneyChange.SetText("-" + DTSPenalty);
+            moneyChange.SetText("-" + counterFlowing);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
 
-            dtsCount += 1;
+            counterflowCount += 1;
             violations += 1;
             data.saveData();
         }
