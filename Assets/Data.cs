@@ -17,8 +17,6 @@ public class Data : MonoBehaviour
     public bool lvl10 = false;
     public bool canPlay = false;
 
-    public string material;
-
     public void saveData()
     {
         SaveSystem.SaveData(this);
@@ -40,8 +38,6 @@ public class Data : MonoBehaviour
         lvl10 = data.lvl10;
 
         canPlay = data.canPlay;
-        material = data.material;
-
     }
 
     public void ResetData()
