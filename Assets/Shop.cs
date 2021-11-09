@@ -8,7 +8,7 @@ public class Shop : MonoBehaviour
     public string material;
     public Material blue;
     public Material red;
-    public Material blue;
+    public Material black;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
     {
         if (material == "red"&& data.money>=20000)
         {
-
+            data.
         }
         if (material == "blue" && data.money >= 40000)
         {
