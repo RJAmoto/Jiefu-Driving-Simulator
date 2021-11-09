@@ -20,7 +20,7 @@ public class CarCheckerCollision : MonoBehaviour
         action = GameObject.Find("Watcher").GetComponent<PlayerActions>();
         playerSpeed = GameObject.Find("Speed Meter").GetComponent<Speedometer>();
     }
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (this.name == "SeatBeltSign"&&other.tag == "Player")
         {
@@ -39,7 +39,7 @@ public class CarCheckerCollision : MonoBehaviour
             {
                 action.BTRL();
             }
-            else
+            else if(trafficLight.lights[2].enabled == true)
             {
                 action.goodBoy();
             }

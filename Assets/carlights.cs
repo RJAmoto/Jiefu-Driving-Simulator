@@ -8,6 +8,8 @@ public class carlights : MonoBehaviour {
 	public Toggle signalR;
 	public Toggle signalL;
 
+	public bool headlightRequired;
+
 
 	public GameObject hazzardB;
 	public GameObject sLeftB;
@@ -47,9 +49,13 @@ public class carlights : MonoBehaviour {
 	public bool SignalLeft;
 	public bool hazardL;
 
+	PlayerActions actions;
+
+	float Timer = 6;
+
 	// Use this for initialization
 	void Start () {
-	
+		actions = GameObject.Find("Watcher").GetComponent<PlayerActions>();
 	}
 	
 	// Update is called once per frame
@@ -64,10 +70,16 @@ public class carlights : MonoBehaviour {
 		{
 			brakelights.material = brakelightOFF;
 		}
+		Timer = Timer - 1 * Time.deltaTime;
 
+		if (Timer <= 0)
+        {
+			Timer = 0;
+        }
 		//headlights on/off//
 		if(HeadLight)
 		{
+			
 			headlights.material = headlightsON;
 			spotlightLEFT.intensity = 8f;
 			spotlightRIGHT.intensity = 8f;
@@ -78,7 +90,13 @@ public class carlights : MonoBehaviour {
 			spotlightLEFT.intensity = 0f;
 			spotlightRIGHT.intensity = 0f;
 		}
-
+		if (Timer == 0)
+		{
+			if (headlightRequired && !HeadLight)
+			{
+				actions.NoHeadlightOn();
+			}
+		}
 		//steer right//
 		if(SignalRight)
 		{

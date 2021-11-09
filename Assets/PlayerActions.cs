@@ -9,12 +9,13 @@ public class PlayerActions : MonoBehaviour
     Animator TextAnimator;
     Animator redEffect;
     Data data;
-
+    public PauseMenu pause;
     int btrlCount = 0;
     int recklessCount = 0;
     int dtsCount = 0;
     int overspeedCount = 0;
     int counterflowCount = 0;
+    int noHeadlightCount = 0;
     int violations = 0;
 
     float recklessPenalty = 1000;
@@ -23,6 +24,7 @@ public class PlayerActions : MonoBehaviour
     float DTSPenalty = 300;
     float counterFlowing = 100;
     float reward = 500;
+    float noHeadlightPenalty = 200;
 
     float popUpTimer = 0;
     float popUpTime = 1;
@@ -39,6 +41,7 @@ public class PlayerActions : MonoBehaviour
     public TextMeshProUGUI violation;
     public TextMeshProUGUI moneyChange;
     public TextMeshProUGUI Counterflow;
+    public TextMeshProUGUI NoHeadlight;
 
     bool GameIsFinished = false;
     FinishCollisionDetector gComplete1;
@@ -52,6 +55,9 @@ public class PlayerActions : MonoBehaviour
 
     public float timer = 0;
     float time = 1;
+
+
+    float stoppedTimer = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +79,9 @@ public class PlayerActions : MonoBehaviour
     void Update()
     {
             timer = timer - 1 * Time.deltaTime;
+
+
+
         if (PopUp)
         {
             popUpTime = popUpTime -= 1 * Time.deltaTime;
@@ -93,7 +102,9 @@ public class PlayerActions : MonoBehaviour
         }
         else if (violations > 0)
         {
-            violation.SetText("Violations \r\n \r\nBeating the Red light: " + btrlCount + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount + "\r\nOver Speeding: " + overspeedCount);
+            violation.SetText("Violations \r\nBeating the Red light: " 
+                + btrlCount + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount + "\r\nOver Speeding: " 
+                + overspeedCount + "\r\nIllegal Overtake: " + counterflowCount + "\r\nCareless Driving: " + counterflowCount);
         }
 
 
@@ -105,6 +116,21 @@ public class PlayerActions : MonoBehaviour
             data.saveData();
         }
 
+        if (gComplete1.stopped == true && gComplete2.stopped == true && gComplete3.stopped == true && gComplete4.stopped == true && meter.speed < 5)
+        {
+            stoppedTimer = stoppedTimer - 1 * Time.deltaTime;
+
+            if(stoppedTimer <= 0)
+            {
+                stoppedTimer = 0;
+            }
+            if (stoppedTimer == 0)
+            {
+                stoppedTimer = 4;
+                goodBoy();
+            }
+        }
+
 
         if (data.money <= 0)
         {
@@ -112,13 +138,10 @@ public class PlayerActions : MonoBehaviour
         }
         if (popUpTime <= 0)
         {
-            GameObject.Find("Canvas").GetComponent<PauseMenu>().SetPause();
-            GameObject.Find("Controls").active = false;
+            pause.SetPause();
+            GameObject.Find("Controls").SetActive(false);
         }
     }
-
-
-
     public void recklessDriving()
     {
         if (timer == 0) {
@@ -137,6 +160,30 @@ public class PlayerActions : MonoBehaviour
 
 
             recklessCount += 1;
+            violations += 1;
+            data.saveData();
+        }
+    }
+
+    public void NoHeadlightOn()
+    {
+        if (timer == 0)
+        {
+            NoHeadlight.GetComponent<Animator>().SetTrigger("ViolText");
+            redEffect.SetTrigger("RedEffect");
+            data.money = data.money - noHeadlightPenalty;
+
+            if (data.money < 0)
+            {
+                data.money = 0;
+            }
+            timer = 4;
+            moneyChange.SetText("-" + noHeadlightPenalty);
+            moneyChange.GetComponent<Animator>().SetTrigger("Minus");
+
+
+
+            noHeadlightCount += 1;
             violations += 1;
             data.saveData();
         }
@@ -172,7 +219,7 @@ public class PlayerActions : MonoBehaviour
             data.money = data.money - btrlPenalty;
             moneyChange.SetText("-" + btrlPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
-            timer = time;
+            timer = 4;
             if (data.money < 0)
             {
                 data.money = 0;
@@ -295,7 +342,7 @@ public class PlayerActions : MonoBehaviour
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - counterFlowing;
 
-            timer = time;
+            timer = 3;
             if (data.money < 0)
             {
                 data.money = 0;

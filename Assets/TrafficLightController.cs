@@ -6,14 +6,8 @@ public class TrafficLightController : MonoBehaviour
 {
     public float time = 5;
     public Light[] lights;
-    int index = 0;
-    // Update is called once per frame
+    public int index = 0;
     PlayerActions action;
-
-    private void Start()    
-    {
-
-    }
 
     void Update()
     {
@@ -42,7 +36,7 @@ public class TrafficLightController : MonoBehaviour
         }
         else if (index == 1)
         {
-            //red + yelllow
+            //red + yellow
             lights[0].enabled = true;
             lights[1].enabled = true;
             lights[2].enabled = false;
