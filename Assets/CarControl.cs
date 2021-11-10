@@ -89,7 +89,7 @@ public class CarControl : MonoBehaviour
     private float wheelMeshWrapperRRz;
     private Data data;
 
-
+    public MeshRenderer paint;
 
     void Awake()
     {

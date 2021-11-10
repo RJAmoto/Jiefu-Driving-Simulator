@@ -17,6 +17,11 @@ public class Data : MonoBehaviour
     public bool lvl10 = false;
     public bool canPlay = false;
 
+    public Material red;
+    public Material blue;
+    public Material black;
+    public Material defaultM;
+
     public void saveData()
     {
         SaveSystem.SaveData(this);
@@ -38,11 +43,16 @@ public class Data : MonoBehaviour
         lvl10 = data.lvl10;
 
         canPlay = data.canPlay;
+
+        red = data.red;
+        blue = data.blue;
+        black = data.black;
+        defaultM = data.defaultM;
     }
 
     public void ResetData()
     {
-        money = 500;
+        money = 500000;
 
         lvl1 = true;
         lvl2 = false;

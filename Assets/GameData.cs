@@ -18,6 +18,10 @@ public class GameData
     public bool lvl9;
     public bool lvl10;
 
+    public Material red;
+    public Material blue;
+    public Material black;
+    public Material defaultM;
     public GameData(Data data)
     {
         money = data.money;
@@ -32,5 +36,10 @@ public class GameData
         lvl8 = data.lvl8;
         lvl9 = data.lvl9;
         lvl10 = data.lvl10;
+
+        red = data.red;
+        blue = data.blue;
+        black = data.black;
+        defaultM = data.black;
     }
 }
