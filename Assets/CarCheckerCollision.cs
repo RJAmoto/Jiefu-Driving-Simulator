@@ -55,6 +55,9 @@ public class CarCheckerCollision : MonoBehaviour
                 action.goodBoy();
             }
         }
-
+        if (this.tag == "Sign" && other.tag == "Player")
+        {
+            action.DisregardingTrafficSign();
+        }
     }
 }

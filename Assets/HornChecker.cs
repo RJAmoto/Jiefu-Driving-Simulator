@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class HornChecker : MonoBehaviour
 {
-
+    public CarControl control;
     PlayerActions actions;
     // Start is called before the first frame update
     void Start()
     {
+
         actions = GameObject.Find("Watcher").GetComponent<PlayerActions>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void OnTriggerStay(Collider other)
     {
-        if ()
+        if (control.hornOpen)
         {
-            actions.disregardingTrafficSign();
+            actions.DisregardingTrafficSign();
         }
     }
 }

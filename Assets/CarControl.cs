@@ -14,6 +14,8 @@ public class CarControl : MonoBehaviour
     public float steer;
     public float brake;
 
+    public bool hornOpen = false;
+
     [Range(0, 1)]
     public float KeepGrip = 1f;
     public float Grip = 5f;
@@ -184,11 +186,13 @@ public class CarControl : MonoBehaviour
 
     public void horn()
     {
+        hornOpen = true;
         FindObjectOfType<AudioManager>().Play("Horn");
     }
 
     public void StopHorn()
     {
+        hornOpen = false;
         FindObjectOfType<AudioManager>().Stop("Horn");
     }
 
