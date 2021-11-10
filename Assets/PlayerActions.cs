@@ -240,7 +240,7 @@ public class PlayerActions : MonoBehaviour
             redEffect.SetTrigger("RedEffect");
             data.money = data.money - overSpeedingPenalty;
 
-            timer = time;
+            timer = 3;
 
             if (data.money < 0)
             {
@@ -259,7 +259,7 @@ public class PlayerActions : MonoBehaviour
         if (timer == 0)
         {
 
-            timer = 3;
+            timer = 5;
             good.GetComponent<Animator>().SetTrigger("ViolText");
             data.money = data.money + reward;
 
