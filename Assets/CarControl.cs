@@ -87,14 +87,12 @@ public class CarControl : MonoBehaviour
     private float wheelMeshWrapperRRx;
     private float wheelMeshWrapperRRy;
     private float wheelMeshWrapperRRz;
-    private Data data;
 
-    public MeshRenderer paint;
+
 
     void Awake()
     {
         Rigidbody = GameObject.Find("CivilianVehicle05").GetComponent<Rigidbody>();
-        data = GameObject.Find("GameData").GetComponent<Data>();
         Rigidbody.centerOfMass = centerOfMass;
         OnValidate();
     }
@@ -148,8 +146,6 @@ public class CarControl : MonoBehaviour
             // Apply torque
             wheelRR.motorTorque = torquePower;
             wheelRL.motorTorque = torquePower;
-
-            data.loadData();
         }
 
         // CONTROLS - LEFT & RIGHT
@@ -166,6 +162,7 @@ public class CarControl : MonoBehaviour
 
         // SPEED
         // debug info
+        RO_speed = Rigidbody.velocity.magnitude;
         RO_speed = Rigidbody.velocity.magnitude;
 
 

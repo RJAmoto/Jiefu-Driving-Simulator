@@ -15,7 +15,7 @@ D:/Documents/Jiefu Driving Simulator
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-55545
+57544
 Successfully changed project path to: D:/Documents/Jiefu Driving Simulator
 D:/Documents/Jiefu Driving Simulator
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,15 +47,3 @@ D:/Documents/Jiefu Driving Simulator
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 8558.34 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 2021.2.1f1 (c20c6d589440)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2021.2.1f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path D:/Documents/Jiefu Driving Simulator/Assets
-GfxDevice: creating device client; threaded=0; jobified=0
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: AMD Radeon HD 6410D (ID=0x9644)
-    Vendor:   ATI
-    VRAM:     499 MB
-    Driver:   15.201.1151.0
