@@ -18,10 +18,16 @@ public class GameData
     public bool lvl9;
     public bool lvl10;
 
-    public Material red;
-    public Material blue;
-    public Material black;
-    public Material defaultM;
+    public int violations;
+    public int btrlCount;
+    public int recklessCount;
+    public int dtsCount;
+    public int overspeedCount;
+    public int counterflowCount;
+    public int noHeadlightCount;
+
+    public float score;
+
     public GameData(Data data)
     {
         money = data.money;
@@ -37,9 +43,14 @@ public class GameData
         lvl9 = data.lvl9;
         lvl10 = data.lvl10;
 
-        red = data.red;
-        blue = data.blue;
-        black = data.black;
-        defaultM = data.black;
+        score = data.score;
+
+        violations = data.violations;
+        btrlCount = data.btrlCount;
+        recklessCount = data.recklessCount;
+        dtsCount = data.dtsCount;
+        overspeedCount = data.overspeedCount;
+        counterflowCount = data.counterflowCount;
+        noHeadlightCount = data.noHeadlightCount;
     }
 }

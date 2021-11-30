@@ -27,6 +27,9 @@ public class carlights : MonoBehaviour {
 	public Material brakelightON;
 	public Material brakelightOFF;
 
+	public Renderer plate;
+
+
 	public Renderer headlights;
 	public Material headlightsON;
 	public Material headlightsOFF;
@@ -63,12 +66,23 @@ public class carlights : MonoBehaviour {
 		//braking//
 		if(Brake==1)
 		{
+			brakelightON.SetColor("_EmissionColor", brakelightON.color * 5);
 			brakelights.material = brakelightON;
 		}
 		//not braking//
 		else
 		{
-			brakelights.material = brakelightOFF;
+            if (HeadLight)
+            {
+				brakelightON.SetColor("_EmissionColor", brakelightON.color * 1);
+				brakelights.material = brakelightON;
+				plate.material.SetColor("_EmissionColor", plate.material.color * 3);
+			}
+            else
+            {
+				brakelights.material = brakelightOFF;
+				plate.material.SetColor("_EmissionColor", plate.material.color * 0);
+			}
 		}
 		Timer = Timer - 1 * Time.deltaTime;
 
@@ -79,10 +93,10 @@ public class carlights : MonoBehaviour {
 		//headlights on/off//
 		if(HeadLight)
 		{
-			
 			headlights.material = headlightsON;
 			spotlightLEFT.intensity = 8f;
 			spotlightRIGHT.intensity = 8f;
+			plate.material.SetColor("_EmissionColor", plate.material.color * 3);
 		}
 		else
 		{

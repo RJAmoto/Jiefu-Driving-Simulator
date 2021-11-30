@@ -12,6 +12,8 @@ public class Quizzer : MonoBehaviour
     public TextMeshProUGUI MoneyAnimText;
     public TextMeshProUGUI result;
 
+    public TextMeshProUGUI score;
+
     public TextMeshProUGUI ansText1;
     public TextMeshProUGUI ansText2;
     public TextMeshProUGUI ansText3;
@@ -28,13 +30,13 @@ public class Quizzer : MonoBehaviour
     void Start()
     {
         data = GameObject.Find("GameData").GetComponent<Data>();
-        data.loadData();
-    }
 
+        data.loadData();
+
+    }
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(q[questionCounter].getQuestion());
         if (questionCounter >= q.Length)
         {
             questionCounter = 0;
@@ -45,8 +47,7 @@ public class Quizzer : MonoBehaviour
         ansText2.SetText(q[questionCounter].choice2);
         ansText3.SetText(q[questionCounter].choice3);
         answerIndex = q[questionCounter].answer;
-
-        Debug.Log(questionCounter);
+        score.SetText("Score: " + data.score);
     }
 
     public void choose(int choiceIndex)
@@ -56,6 +57,8 @@ public class Quizzer : MonoBehaviour
         if (choiceIndex==answerIndex)
         {
             data.money += 100;
+            data.score += 1;
+
             result.SetText("Correct");
             res.SetTrigger("correct");
             MoneyAnimText.SetText("+100");

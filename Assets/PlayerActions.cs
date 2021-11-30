@@ -10,13 +10,13 @@ public class PlayerActions : MonoBehaviour
     Animator redEffect;
     Data data;
     public PauseMenu pause;
-    int btrlCount = 0;
-    int recklessCount = 0;
-    int dtsCount = 0;
-    int overspeedCount = 0;
-    int counterflowCount = 0;
-    int noHeadlightCount = 0;
-    int violations = 0;
+    public int btrlCount = 0;
+    public int recklessCount = 0;
+    public int dtsCount = 0;
+    public int overspeedCount = 0;
+    public int counterflowCount = 0;
+    public int noHeadlightCount = 0;
+    public int violations = 0;
 
     float recklessPenalty = 1000;
     float btrlPenalty = 2000;
@@ -102,6 +102,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (violations > 0)
         {
+
             violation.SetText("Violations \r\nBeating the Red light: " 
                 + btrlCount + "\r\nReckless Driving: " + recklessCount + "\r\nDisregarding Traffic Sign: " + dtsCount + "\r\nOver Speeding: " 
                 + overspeedCount + "\r\nIllegal Overtake: " + counterflowCount + "\r\nCareless Driving: " + counterflowCount);
@@ -220,6 +221,8 @@ public class PlayerActions : MonoBehaviour
             moneyChange.SetText("-" + btrlPenalty);
             moneyChange.GetComponent<Animator>().SetTrigger("Minus");
             timer = 4;
+
+
             if (data.money < 0)
             {
                 data.money = 0;
@@ -272,14 +275,24 @@ public class PlayerActions : MonoBehaviour
 
     public void gameOver()
     {
-            openGameOverPopUp();
+        data.score = 0;
+        openGameOverPopUp();
     }
     public void openFinishPopup()
     {
+        data.violations += violations;
+        data.btrlCount += btrlCount;
+        data.recklessCount += recklessCount;
+        data.dtsCount += dtsCount;
+        data.overspeedCount += overspeedCount;
+        data.counterflowCount += counterflowCount;
+        data.noHeadlightCount += noHeadlightCount;
+
+        data.saveData();
+
         GameObject.Find("FinishPopUp").GetComponent<Animator>().SetTrigger("FinishOpen");
         PopUp = true;
     }
-
     public void openGameOverPopUp()
     {
         GameObject.Find("Game Over Pop up").GetComponent<Animator>().SetTrigger("Open");

@@ -17,10 +17,15 @@ public class Data : MonoBehaviour
     public bool lvl10 = false;
     public bool canPlay = false;
 
-    public Material red;
-    public Material blue;
-    public Material black;
-    public Material defaultM;
+    public int violations = 0;
+    public int btrlCount = 0;
+    public int recklessCount = 0;
+    public int dtsCount = 0;
+    public int overspeedCount = 0;
+    public int counterflowCount = 0;
+    public int noHeadlightCount = 0;
+
+    public float score = 0;
 
     public void saveData()
     {
@@ -44,15 +49,20 @@ public class Data : MonoBehaviour
 
         canPlay = data.canPlay;
 
-        red = data.red;
-        blue = data.blue;
-        black = data.black;
-        defaultM = data.defaultM;
+        violations = data.violations;
+        btrlCount = data.btrlCount;
+        recklessCount = data.recklessCount;
+        dtsCount = data.dtsCount;
+        overspeedCount = data.overspeedCount;
+        counterflowCount = data.counterflowCount;
+        noHeadlightCount = data.noHeadlightCount;
+
+        score = data.score;
     }
 
     public void ResetData()
     {
-        money = 500000;
+        money = 50000;
 
         lvl1 = true;
         lvl2 = false;
@@ -66,6 +76,16 @@ public class Data : MonoBehaviour
         lvl10 = false;
 
         canPlay = true;
+
+        violations = 0;
+        btrlCount = 0;
+        recklessCount = 0;
+        dtsCount = 0;
+        overspeedCount = 0;
+        counterflowCount = 0;
+        noHeadlightCount = 0;
+
+        score = 0;
 
         saveData();
     }

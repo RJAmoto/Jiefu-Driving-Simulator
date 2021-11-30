@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     public bool canPlay = true;
     Data data;
-
+    public int requiredScore = 50;
     public float money;
     public void Start()
     {
@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
         switch (lvl)
         {
             case 1:
-                if (GameObject.Find("Lvl1").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl1").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 2:
-                if (GameObject.Find("Lvl2").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl2").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 3:
-                if (GameObject.Find("Lvl3").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl3").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -72,7 +72,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 4:
-                if (GameObject.Find("Lvl4").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl4").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -82,7 +82,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 5:
-                if (GameObject.Find("Lvl5").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl5").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -92,7 +92,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 6:
-                if (GameObject.Find("Lvl6").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl6").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -102,7 +102,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 7:
-                if (GameObject.Find("Lvl7").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl7").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -112,7 +112,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 8:
-                if (GameObject.Find("Lvl8").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl8").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -122,7 +122,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 9:
-                if (GameObject.Find("Lvl9").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl9").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
@@ -132,7 +132,7 @@ public class MainMenu : MonoBehaviour
                 }
                 break;
             case 10:
-                if (GameObject.Find("Lvl10").GetComponent<LevelLocker>().isLocked || canPlay == false)
+                if (GameObject.Find("Lvl10").GetComponent<LevelLocker>().isLocked || canPlay == false || data.score < requiredScore)
                 {
                     return;
                 }
