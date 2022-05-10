@@ -2,7 +2,7 @@
   <a href="https://github.com/RJAmoto/Jiefu-Driving-Simulator">
     <img src = "screenshot/logo.png" width = "50%" height = "50%">
   </a>
-
+ 
   <h3 align="center">Jiefu Driving Simulator</h3>
 
   <p align="center">
@@ -68,4 +68,4 @@ https://youtu.be/ZzQ0zjj0o3o
 * **Rudolph John Agpoon**
 * **Nomer Fabroliña**
 * **Jeff Rivera**
-* **Richmond Ramil**
+* **Richmond Ramil** 1
